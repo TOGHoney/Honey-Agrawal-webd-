@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <link rel="stylesheet" href="design.css">
+
+    <style>
+        /* Additional styling specifically for the form */
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--gold);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid rgba(206, 163, 53, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--light);
+            font-size: 0.95rem;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 6px rgba(206, 163, 53, 0.4);
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-size: 0.85rem;
+            margin-top: 3px;
+            display: block;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 22px;
+            background: var(--gold);
+            border-radius: 25px;
+            border: none;
+            color: #210b0b;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #f0c96a;
+            transform: translateY(-1px);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="logo">Royal Moments Events</div>
+
+        <nav class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="catalogue.html">Catalogue</a>
+            <a href="past-projects.html">Past Projects</a>
+            <a href="my-booking.html">My Booking</a>
+            <a href="login.html">Login / Signup</a>
+        </nav>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="container">
+        <h1>Signup / Login Form</h1>
+
+        <form id="myForm">
+
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+                <span id="nameError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <span id="emailError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password">
+                <span id="passwordError" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+                <span id="ageError" class="error"></span>
+            </div>
+
+            <button type="button" onclick="validateForm()" class="submit-btn">Submit</button>
+        </form>
+    </main>
+
+    <footer>
+        © 2025 Royal Moments Events. All rights reserved.
+    </footer>
+
+    <!-- JAVASCRIPT VALIDATION (unchanged) -->
+    <script>
+        function validateForm() {
+            document.getElementById("nameError").textContent = "";
+            document.getElementById("emailError").textContent = "";
+            document.getElementById("passwordError").textContent = "";
+            document.getElementById("ageError").textContent = "";
+
+            let isValid = true;
+
+            const name = document.getElementById("name").value.trim();
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Name is required.";
+                isValid = false;
+            }
+
+            const email = document.getElementById("email").value.trim();
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Email is required.";
+                isValid = false;
+            } 
+            else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Invalid email format.";
+                isValid = false;
+            }
+
+            const password = document.getElementById("password").value.trim();
+            if (password === "") {
+                document.getElementById("passwordError").textContent = "Password is required.";
+                isValid = false;
+            } 
+            else if (password.length < 6) {
+                document.getElementById("passwordError").textContent = "Password must be at least 6 characters long.";
+                isValid = false;
+            }
+
+            const age = document.getElementById("age").value.trim();
+            if (age === "") {
+                document.getElementById("ageError").textContent = "Age is required.";
+                isValid = false;
+            } 
+            else if (isNaN(age) || age <= 0) {
+                document.getElementById("ageError").textContent = "Age must be a positive number.";
+                isValid = false;
+            }
+
+            if (isValid) {
+                alert("Form submitted successfully!");
+                window.location.href = "index.html";
+            }
+        }
+    </script>
+
+</body>
+</html>
