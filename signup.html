@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Royal Moments Events | Login</title>
+    <title>Royal Moments Events | Sign Up</title>
     <link rel="stylesheet" href="design.css">
 
     <style>
@@ -53,7 +53,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: 0.2s;
-            width: 100%;
         }
 
         .submit-btn:hover {
@@ -67,12 +66,12 @@
             color: var(--gold);
         }
 
-        .signup-link {
+        .login-link {
             text-align: center;
             margin-top: 20px;
         }
 
-        .signup-btn {
+        .login-btn {
             background: transparent;
             color: var(--gold);
             border: 1px solid rgba(206, 163, 53, 0.4);
@@ -86,7 +85,7 @@
             transition: 0.2s;
         }
 
-        .signup-btn:hover {
+        .login-btn:hover {
             background: var(--gold);
             color: #210b0b;
             transform: translateY(-1px);
@@ -103,14 +102,20 @@
             <a href="catalogue.html">Catalogue</a>
             <a href="past-projects.html">Past Projects</a>
             <a href="my-booking.html">My Booking</a>
-            <a href="signup.html">Login</a>
+            <a href="login.html">SignUp</a>
         </nav>
     </header>
 
     <main class="container">
-        <h1>Login</h1>
+        <h1>Create Account</h1>
 
-        <form id="loginForm" onsubmit="return false;">
+        <form id="signupForm" onsubmit="return false;">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" required>
+                <span id="nameError" class="error"></span>
+            </div>
+            
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" required>
@@ -123,46 +128,87 @@
                 <span id="passwordError" class="error"></span>
             </div>
             
-            <button type="button" class="submit-btn" onclick="validateLogin()">Login</button>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" required>
+                <span id="ageError" class="error"></span>
+            </div>
+            
+            <button type="button" class="submit-btn" onclick="validateForm()">Create Account</button>
         </form>
         
-        <div class="signup-link">
-            <a href="signup.html" class="signup-btn">Don't have an account? Sign Up</a>
+        <div class="login-link">
+            <a href="login.html" class="login-btn">Already have an account? Login</a>
         </div>
     </main>
 
     <script>
-        function validateLogin() {
+        function validateForm() {
+            document.getElementById("nameError").textContent = "";
             document.getElementById("emailError").textContent = "";
             document.getElementById("passwordError").textContent = "";
+            document.getElementById("ageError").textContent = "";
 
             let isValid = true;
 
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
-
-            if (email === "") {
-                document.getElementById("emailError").textContent = "Email is required.";
+            const name = document.getElementById("name").value.trim();
+            if (name === "") {
+                document.getElementById("nameError").textContent = "Name is required.";
                 isValid = false;
             }
 
+            const email = document.getElementById("email").value.trim();
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,}$/;
+            if (email === "") {
+                document.getElementById("emailError").textContent = "Email is required.";
+                isValid = false;
+            } 
+            else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").textContent = "Invalid email format.";
+                isValid = false;
+            }
+
+            const password = document.getElementById("password").value.trim();
             if (password === "") {
                 document.getElementById("passwordError").textContent = "Password is required.";
+                isValid = false;
+            } 
+            else if (password.length < 6) {
+                document.getElementById("passwordError").textContent = "Password must be at least 6 characters long.";
+                isValid = false;
+            }
+
+            const age = document.getElementById("age").value.trim();
+            if (age === "") {
+                document.getElementById("ageError").textContent = "Age is required.";
+                isValid = false;
+            } 
+            else if (isNaN(age) || age <= 0) {
+                document.getElementById("ageError").textContent = "Age must be a positive number.";
                 isValid = false;
             }
 
             if (isValid) {
+                const userData = {
+                    name: name,
+                    email: email,
+                    password: password,
+                    age: age,
+                    signupDate: new Date().toISOString()
+                };
+
                 let users = JSON.parse(localStorage.getItem('users')) || [];
-                const user = users.find(u => u.email === email && u.password === password);
-                
-                if (user) {
-                    localStorage.setItem('loggedInUser', JSON.stringify(user));
-                    alert("Login successful! Welcome back!");
-                    window.location.href = "my-booking.html";
-                } else {
-                    document.getElementById("emailError").textContent = "Invalid email or password.";
-                    document.getElementById("passwordError").textContent = "";
+                const emailExists = users.some(user => user.email === email);
+                if (emailExists) {
+                    alert("Email already registered. Please use a different email.");
+                    return;
                 }
+
+                users.push(userData);
+                localStorage.setItem('users', JSON.stringify(users));
+                
+                alert("Account created successfully!");
+                window.location.href = "index.html";
             }
         }
     </script>

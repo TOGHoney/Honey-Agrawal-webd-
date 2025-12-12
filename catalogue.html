@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Royal Moments Events | Catalogue</title>
-   <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="design.css">
 </head>
 <body>
 <header class="navbar">
@@ -13,20 +13,20 @@
         <a href="catalogue.html">Catalogue</a>
         <a href="past-projects.html">Past Projects</a>
         <a href="my-booking.html">My Booking</a>
-        <a href="login.html">Login / Signup</a>
+        <a href="signup.html"> Signup/Login</a>
     </nav>
 </header>
 
 <main class="container">
     <h1>Banquet Catalogue</h1>
     <p class="muted">
-        Choose from carefully selected banquets with rich maroon‑gold décor, ideal for elegant celebrations.[web:11][web:17]
+        Choose from carefully selected banquets with rich maroon‑gold décor, ideal for elegant celebrations.
     </p>
 
     <div class="card-grid">
-        <!-- Banquet 1 -->
-        <div class="card" id="royal-grand">
-            <img src="https://images.pexels.com/photos/169196/pexels-photo-169196.jpeg" style="height: 600px; width: 900px;"
+        
+        <div class="card" data-venue="royal-grand">
+            <img src="https://images.pexels.com/photos/169196/pexels-photo-169196.jpeg"
                  alt="Royal Grand Palace banquet hall">
             <div class="card-body">
                 <span class="badge">Premium</span>
@@ -34,18 +34,16 @@
                 <div class="subtext">Gomti Nagar, Lucknow</div>
                 <p>
                     A spacious indoor banquet with crystal chandeliers, maroon drapes, and golden stage décor for
-                    large weddings and receptions.[web:5][web:8]
+                    large weddings and receptions.
                 </p>
-                <a class="outline-btn" style="float: left; margin-top: 5px;" href="#royal-grand-details">
-                    Details
-                </a>
+                <a class="outline-btn details-btn" href="#" data-venue="royal-grand">Details</a>
                 <div style="clear: both;"></div>
             </div>
         </div>
 
-        <!-- Banquet 2 -->
-        <div class="card" id="emerald">
-            <img src="https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg" style="height: 600px; width: 900px;"
+        
+        <div class="card" data-venue="emerald">
+            <img src="https://images.pexels.com/photos/169190/pexels-photo-169190.jpeg"
                  alt="Emerald Crown banquet">
             <div class="card-body">
                 <span class="badge">Luxury</span>
@@ -53,18 +51,16 @@
                 <div class="subtext">Hazratganj, Lucknow</div>
                 <p>
                     A classy ballroom combining soft lighting, floral centrepieces, and a gold‑accented dance floor,
-                    perfect for cocktails and receptions.[web:11]
+                    perfect for cocktails and receptions.
                 </p>
-                <a class="outline-btn" style="float: left; margin-top: 5px;" href="#emerald-details">
-                    Details
-                </a>
+                <a class="outline-btn details-btn" href="#" data-venue="emerald">Details</a>
                 <div style="clear: both;"></div>
             </div>
         </div>
 
-        <!-- Banquet 3 -->
-        <div class="card" id="heritage">
-            <img src="https://images.pexels.com/photos/169211/pexels-photo-169211.jpeg" style="height: 600px; width: 900px;"
+        
+        <div class="card" data-venue="heritage">
+            <img src="https://images.pexels.com/photos/169211/pexels-photo-169211.jpeg"
                  alt="Heritage Courtyard banquet">
             <div class="card-body">
                 <span class="badge">Outdoor</span>
@@ -72,55 +68,162 @@
                 <div class="subtext">Alambagh, Lucknow</div>
                 <p>
                     An open‑air lawn with warm maroon fabric pathways, golden fairy lights, and stage setups for
-                    mehendi, haldi, and sangeet nights.[web:17]
+                    mehendi, haldi, and sangeet nights.
                 </p>
-                <a class="outline-btn" style="float: left; margin-top: 5px;" href="#heritage-details">
-                    Details
-                </a>
+                <a class="outline-btn details-btn" href="#" data-venue="heritage">Details</a>
                 <div style="clear: both;"></div>
             </div>
         </div>
     </div>
-
-    <!-- Detailed sections -->
-    <section id="royal-grand-details" style="margin-top: 40px;">
-        <h2>Royal Grand Palace – Details</h2>
-        <p>
-            Capacity: 400–700 guests, central air‑conditioning, dedicated stage area, and separate buffet zone for
-            smooth movement.[web:11]
-        </p>
-        <p>
-            Recommended for: grand weddings, receptions, and corporate award nights with traditional royal themes.[web:11]
-        </p>
-        <a href="my-booking.html" class="primary-btn">Book</a>
-    </section>
-
-    <section id="emerald-details" style="margin-top: 40px;">
-        <h2>Emerald Crown Ballroom – Details</h2>
-        <p>
-            Capacity: 150–300 guests, wooden dance floor, DJ booth space, and mood lighting options for evening events.[web:17]
-        </p>
-        <p>
-            Recommended for: cocktail parties, anniversaries, and intimate destination‑style functions.[web:17]
-        </p>
-        <a href="my-booking.html" class="primary-btn">Book</a>
-    </section>
-
-    <section id="heritage-details" style="margin-top: 40px;">
-        <h2>Heritage Courtyard – Details</h2>
-        <p>
-            Capacity: 200–500 guests with lawn seating, canopy tents, and flexible stage placement for cultural
-            functions.[web:11]
-        </p>
-        <p>
-            Recommended for: day functions, traditional ceremonies, and outdoor musical evenings.[web:17]
-        </p>
-        <a href="my-booking.html" class="primary-btn">Book</a>
-    </section>
 </main>
+
+
+<div id="venueModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="img01">
+    <div id="caption" class="modal-caption"></div>
+</div>
+
+
+<div id="royal-grand-details" style="display: none;">
+    <h2>Royal Grand Palace – Details</h2>
+    <p>Capacity: 400–700 guests, central air‑conditioning, dedicated stage area, and separate buffet zone for smooth movement.</p>
+    <p>Recommended for: grand weddings, receptions, and corporate award nights with traditional royal themes.</p>
+    <a href="my-booking.html" class="primary-btn">Book</a>
+</div>
+
+<div id="emerald-details" style="display: none;">
+    <h2>Emerald Crown Ballroom – Details</h2>
+    <p>Capacity: 150–300 guests, wooden dance floor, DJ booth space, and mood lighting options for evening events.</p>
+    <p>Recommended for: cocktail parties, anniversaries, and intimate destination‑style functions.</p>
+    <a href="my-booking.html" class="primary-btn">Book</a>
+</div>
+
+<div id="heritage-details" style="display: none;">
+    <h2>Heritage Courtyard – Details</h2>
+    <p>Capacity: 200–500 guests with lawn seating, canopy tents, and flexible stage placement for cultural functions.</p>
+    <p>Recommended for: day functions, traditional ceremonies, and outdoor musical evenings.</p>
+    <a href="my-booking.html" class="primary-btn">Book</a>
+</div>
 
 <footer>
     © 2025 Royal Moments Events. All rights reserved.
 </footer>
+
+<style>
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+    padding-top: 60px;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 10px;
+}
+
+#caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 20px 0;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0));
+}
+
+.modal-details {
+    background: white;
+    margin: auto;
+    border-radius: 0 0 10px 10px;
+    width: 80%;
+    max-width: 700px;
+    padding: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+}
+
+.close {
+    position: absolute;
+    top: 25px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1002;
+}
+
+.close:hover,
+.close:focus {
+    color: #999;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+    }
+}
+
+
+.details-btn {
+    float: left;
+    margin-top: 5px;
+}
+</style>
+
+<script>
+
+var modal = document.getElementById("venueModal");
+
+
+var modalImg = document.getElementById("img01");
+var captionText = document.getElementById("caption");
+var detailsContent = document.getElementById("modalDetails");
+
+
+var detailsBtns = document.getElementsByClassName("details-btn");
+
+
+for (var i = 0; i < detailsBtns.length; i++) {
+    var btn = detailsBtns[i];
+    btn.onclick = function(){
+        var venueId = this.getAttribute("data-venue");
+        var imgSrc = this.closest('.card').querySelector('img').src;
+        var detailsSection = document.getElementById(venueId + "-details");
+        
+        modalImg.src = imgSrc;
+        captionText.innerHTML = detailsSection.innerHTML;
+        modal.style.display = "block";
+    }
+}
+
+
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 </body>
 </html>
